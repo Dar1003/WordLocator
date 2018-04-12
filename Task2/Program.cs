@@ -31,26 +31,24 @@ namespace Task2
             for (int g = 0; g < urls.Count; g++)
             {
                 PageData = GetWebText(urls[g]);
-                for (int h = 0; h < words.Count;)
+
+                int h;
+                for (h = 0; h < words.Count; h++)
                 {
-                    if(h==words.Count-1)
+                    if(CheckWord(words[h], PageData)==false)
                     {
-                        Console.Write("the words ");
-                        for (int y = 0; y < words.Count; y++)
-                        {
-                            Console.Write(words[y]+",");
-                        }
-                        Console.Write(" have been found in this link: {0}",urls[g]);
+                        Console.WriteLine("the words failed to be found at {0}", urls[g]);
+                        break;
                     }
-                    if(CheckWord(words[h], PageData)==true)
+                }
+                if (h == words.Count)
+                {
+                    Console.Write("the words ");
+                    for (int y = 0; y < words.Count; y++)
                     {
-                        h++;
+                        Console.Write(words[y] + ",");
                     }
-                    else
-                    {
-                        h = words.Count;
-                        Console.WriteLine("the words failed to be found at {0}",urls[g]);
-                    }
+                    Console.Write(" have been found in this link: {0}", urls[g]);
                 }
             }
         }
